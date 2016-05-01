@@ -24,7 +24,7 @@ module DiscovererUtils =
         let parseSingleTest (currentSuite, result) (currentLine:string) =
             let currentLine = currentLine.Trim([|'.'; '\n'; '\r'|])
             if currentLine.StartsWith("  ") then
-                currentSuite, (currentSuite, currentLine.Substring(2)) :: result
+                currentSuite, (currentSuite, currentLine.Split([|"  #"|], StringSplitOptions.RemoveEmptyEntries).[0].Substring(2)) :: result
             else
                 let stripGtest170TypeParameter =
                     let split = currentLine.Split([|".  # TypeParam"|], StringSplitOptions.RemoveEmptyEntries)
